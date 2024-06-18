@@ -7,4 +7,4 @@ A compiler has been developed to translate Alike code into intermediate code tha
 The document ```alike.pdf``` outlines the rules and specifications of the language.
 
 
-More info in alike/docs/README.md
+More info in ```alike/docs/README.md```
