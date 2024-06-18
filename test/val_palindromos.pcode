@@ -1,0 +1,465 @@
+  ENP L0
+L1:
+  SRF  0  3
+  ASGI
+  JMP L2
+L2:
+  STC 73
+  WRT  0
+  STC 110
+  WRT  0
+  STC 116
+  WRT  0
+  STC 114
+  WRT  0
+  STC 111
+  WRT  0
+  STC 100
+  WRT  0
+  STC 117
+  WRT  0
+  STC 122
+  WRT  0
+  STC 99
+  WRT  0
+  STC 97
+  WRT  0
+  STC 32
+  WRT  0
+  STC 117
+  WRT  0
+  STC 110
+  WRT  0
+  STC 97
+  WRT  0
+  STC 32
+  WRT  0
+  STC 102
+  WRT  0
+  STC 114
+  WRT  0
+  STC 97
+  WRT  0
+  STC 115
+  WRT  0
+  STC 101
+  WRT  0
+  STC 32
+  WRT  0
+  STC 101
+  WRT  0
+  STC 110
+  WRT  0
+  STC 32
+  WRT  0
+  STC 109
+  WRT  0
+  STC 105
+  WRT  0
+  STC 110
+  WRT  0
+  STC -61
+  WRT  0
+  STC -70
+  WRT  0
+  STC 115
+  WRT  0
+  STC 99
+  WRT  0
+  STC 117
+  WRT  0
+  STC 108
+  WRT  0
+  STC 97
+  WRT  0
+  STC 44
+  WRT  0
+  STC 32
+  WRT  0
+  STC 101
+  WRT  0
+  STC 46
+  WRT  0
+  STC 103
+  WRT  0
+  STC 46
+  WRT  0
+  STC 58
+  WRT  0
+  STC 32
+  WRT  0
+  STC 34
+  WRT  0
+  STC 114
+  WRT  0
+  STC 101
+  WRT  0
+  STC 99
+  WRT  0
+  STC 111
+  WRT  0
+  STC 110
+  WRT  0
+  STC 111
+  WRT  0
+  STC 99
+  WRT  0
+  STC 101
+  WRT  0
+  STC 114
+  WRT  0
+  STC 34
+  WRT  0
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  SRF  0  5
+  STC 10
+  ASG
+  SRF  0  4
+  STC 50
+  NGI
+  ASG
+  SRF  0  6
+  RD  0
+  SRF  0  4
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  SRF  0  6
+  DRF
+  ASG
+L3:
+  SRF  0  6
+  DRF
+  SRF  0  5
+  DRF
+  NEQ
+  JMF L4
+  SRF  0  4
+  SRF  0  4
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  6
+  RD  0
+  SRF  0  4
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  SRF  0  6
+  DRF
+  ASG
+  JMP L3
+L4:
+  CSF
+L5:
+  SRF  0  3
+  ASGI
+  JMP L6
+L6:
+  SRF  0  4
+  STC 50
+  NGI
+  ASG
+  SRF  0  5
+  STC 50
+  NGI
+  ASG
+  SRF  0  6
+  STC 10
+  ASG
+  SRF  0  7
+  STC  1
+  ASG
+L7:
+  SRF  0  4
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  SRF  0  6
+  DRF
+  NEQ
+  JMF L8
+  SRF  0  4
+  SRF  0  4
+  DRF
+  STC  1
+  PLUS
+  ASG
+  JMP L7
+L8:
+  SRF  0  4
+  SRF  0  4
+  DRF
+  STC  1
+  NGI
+  PLUS
+  ASG
+L9:
+  SRF  0  5
+  DRF
+  SRF  0  4
+  DRF
+  LT
+  SRF  0  7
+  DRF
+  STC  1
+  EQ
+  AND
+  JMF L16
+L10:
+  SRF  0  5
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  STC 32
+  EQ
+  SRF  0  5
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  STC  9
+  EQ
+  OR
+  JMF L11
+  SRF  0  5
+  SRF  0  5
+  DRF
+  STC  1
+  PLUS
+  ASG
+  JMP L10
+L11:
+L12:
+  SRF  0  4
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  STC 32
+  EQ
+  SRF  0  4
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  STC  9
+  EQ
+  OR
+  JMF L13
+  SRF  0  4
+  SRF  0  4
+  DRF
+  STC  1
+  NGI
+  PLUS
+  ASG
+  JMP L12
+L13:
+  SRF  0  5
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  SRF  0  4
+  DRF
+  STC -50
+  SBT
+  SRF  0  3
+  DRF
+  PLUS
+  DRF
+  NEQ
+  SRF  0  5
+  DRF
+  SRF  0  4
+  DRF
+  LT
+  AND
+  JMF L14
+  SRF  0  7
+  STC  0
+  ASG
+  JMP L15
+L14:
+L15:
+  SRF  0  5
+  SRF  0  5
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  4
+  SRF  0  4
+  DRF
+  STC  1
+  NGI
+  PLUS
+  ASG
+  JMP L9
+L16:
+  SRF  0  7
+  DRF
+  JMF L17
+  STC 76
+  WRT  0
+  STC 97
+  WRT  0
+  STC 32
+  WRT  0
+  STC 102
+  WRT  0
+  STC 114
+  WRT  0
+  STC 97
+  WRT  0
+  STC 115
+  WRT  0
+  STC 101
+  WRT  0
+  STC 32
+  WRT  0
+  STC 101
+  WRT  0
+  STC 115
+  WRT  0
+  STC 32
+  WRT  0
+  STC 117
+  WRT  0
+  STC 110
+  WRT  0
+  STC 32
+  WRT  0
+  STC 112
+  WRT  0
+  STC 97
+  WRT  0
+  STC 108
+  WRT  0
+  STC -61
+  WRT  0
+  STC -83
+  WRT  0
+  STC 110
+  WRT  0
+  STC 100
+  WRT  0
+  STC 114
+  WRT  0
+  STC 111
+  WRT  0
+  STC 109
+  WRT  0
+  STC 111
+  WRT  0
+  STC 46
+  WRT  0
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  JMP L18
+L17:
+  STC 76
+  WRT  0
+  STC 97
+  WRT  0
+  STC 32
+  WRT  0
+  STC 102
+  WRT  0
+  STC 114
+  WRT  0
+  STC 97
+  WRT  0
+  STC 115
+  WRT  0
+  STC 101
+  WRT  0
+  STC 32
+  WRT  0
+  STC 110
+  WRT  0
+  STC 111
+  WRT  0
+  STC 32
+  WRT  0
+  STC 101
+  WRT  0
+  STC 115
+  WRT  0
+  STC 32
+  WRT  0
+  STC 117
+  WRT  0
+  STC 110
+  WRT  0
+  STC 32
+  WRT  0
+  STC 112
+  WRT  0
+  STC 97
+  WRT  0
+  STC 108
+  WRT  0
+  STC -61
+  WRT  0
+  STC -83
+  WRT  0
+  STC 110
+  WRT  0
+  STC 100
+  WRT  0
+  STC 114
+  WRT  0
+  STC 111
+  WRT  0
+  STC 109
+  WRT  0
+  STC 111
+  WRT  0
+  STC 46
+  WRT  0
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+L18:
+  CSF
+L0:
+  SRF  0  3
+  OSF 105  0 L1
+  SRF  0  3
+  OSF 105  0 L5
+  LVP

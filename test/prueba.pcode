@@ -1,0 +1,337 @@
+  ENP L0
+L1:
+  SRF  0  4
+  ASGI
+  SRF  0  3
+  ASGI
+  JMP L2
+L2:
+  SRF  0  5
+  STC  0
+  ASG
+  SRF  0  6
+  STC 97
+  ASG
+  SRF  0  7
+  STC  1
+  ASG
+  STC  1
+  JMF L3
+  JMP L4
+L3:
+  STC  5
+  CSF
+L4:
+  STC  0
+  CSF
+  CSF
+L5:
+  JMP L6
+L6:
+  STC  4
+  CSF
+  CSF
+L7:
+  SRF  0 19
+  ASGI
+  SRF  0 18
+  ASGI
+  SRF  0 17
+  ASGI
+  SRF  0 16
+  ASGI
+  SRF  0 15
+  ASGI
+  SRF  0 14
+  ASGI
+  SRF  0 13
+  ASGI
+  SRF  0 12
+  ASGI
+  SRF  0 11
+  ASGI
+  SRF  0 10
+  ASGI
+  SRF  0  9
+  ASGI
+  SRF  0  8
+  ASGI
+  SRF  0  7
+  ASGI
+  SRF  0  6
+  ASGI
+  SRF  0  5
+  ASGI
+  SRF  0  4
+  ASGI
+  SRF  0  3
+  ASGI
+  JMP L8
+L8:
+  SRF  0  4
+  DRF
+  STC  5
+  ASG
+  STC  5
+  STC  1
+  SBT
+  SRF  0 19
+  DRF
+  PLUS
+  STC  5
+  ASG
+  CSF
+L9:
+  SRF  0 19
+  ASGI
+  SRF  0 18
+  ASGI
+  SRF  0 17
+  ASGI
+  SRF  0 16
+  ASGI
+  SRF  0 15
+  ASGI
+  SRF  0 14
+  ASGI
+  SRF  0 13
+  ASGI
+  SRF  0 12
+  ASGI
+  SRF  0 11
+  ASGI
+  SRF  0 10
+  ASGI
+  SRF  0  9
+  ASGI
+  SRF  0  8
+  ASGI
+  SRF  0  7
+  ASGI
+  SRF  0  6
+  ASGI
+  SRF  0  5
+  ASGI
+  SRF  0  4
+  ASGI
+  SRF  0  3
+  ASGI
+  JMP L10
+L10:
+  STC 56
+  CSF
+  CSF
+L0:
+  STC  5
+  STC  1
+  SBT
+  SRF  0 10
+  PLUS
+  STC  2
+  ASG
+  SRF  0  3
+  STC 96
+  ASG
+  SRF  0  5
+  STC 99
+  ASG
+  SRF  0  4
+  STC 60
+  ASG
+  SRF  0  7
+  STC  0
+  ASG
+  STC  1
+  JMF L11
+  JMP L12
+L11:
+L12:
+  STC 104
+  WRT  0
+  STC 111
+  WRT  0
+  STC 108
+  WRT  0
+  STC 97
+  WRT  0
+  OSF 30  0 L5
+  WRT  1
+  SRF  0  3
+  DRF
+  WRT  1
+  SRF  0  5
+  DRF
+  WRT  0
+  STC  5
+  STC  1
+  SBT
+  SRF  0 10
+  PLUS
+  DRF
+  WRT  1
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  SRF  0  5
+  STC  2
+  STC  3
+  PLUS
+  ASG
+  STC 97
+  WRT  0
+  STC 113
+  WRT  0
+  STC 117
+  WRT  0
+  STC 105
+  WRT  0
+  STC 97
+  WRT  0
+  STC 107
+  WRT  0
+  STC 107
+  WRT  0
+  STC 98
+  WRT  1
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  SRF  0  3
+  STC 100
+  ASG
+  SRF  0  3
+  DRF
+  WRT  1
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  SRF  0  3
+  STC 54
+  SRF  0  3
+  OSF 30  0 L1
+  ASG
+  STC  5
+  STC  1
+  SBT
+  SRF  0 10
+  PLUS
+  STC  2
+  ASG
+  STC  5
+  STC  1
+  SBT
+  SRF  0 20
+  PLUS
+  STC  2
+  ASG
+  SRF  0  3
+  DRF
+  STC  5
+  STC  1
+  SBT
+  SRF  0 10
+  PLUS
+  SRF  0  5
+  DRF
+  SRF  0  6
+  SRF  0  7
+  DRF
+  SRF  0  8
+  SRF  0 10
+  DRF
+  SRF  0 11
+  DRF
+  SRF  0 12
+  DRF
+  SRF  0 13
+  DRF
+  SRF  0 14
+  DRF
+  SRF  0 15
+  DRF
+  SRF  0 16
+  DRF
+  SRF  0 17
+  DRF
+  SRF  0 18
+  DRF
+  SRF  0 19
+  DRF
+  SRF  0 20
+  OSF 30  0 L7
+  STC  5
+  STC  1
+  SBT
+  SRF  0 10
+  PLUS
+  DRF
+  WRT  1
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC  5
+  STC  1
+  SBT
+  SRF  0 20
+  PLUS
+  DRF
+  WRT  1
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  SRF  0  3
+  DRF
+  SRF  0  4
+  SRF  0  5
+  DRF
+  SRF  0  6
+  SRF  0  7
+  DRF
+  SRF  0  8
+  SRF  0 10
+  DRF
+  SRF  0 11
+  DRF
+  SRF  0 12
+  DRF
+  SRF  0 13
+  DRF
+  SRF  0 14
+  DRF
+  SRF  0 15
+  DRF
+  SRF  0 16
+  DRF
+  SRF  0 17
+  DRF
+  SRF  0 18
+  DRF
+  SRF  0 19
+  DRF
+  SRF  0 20
+  OSF 30  0 L9
+  WRT  1
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+L13:
+  SRF  0  3
+  DRF
+  STC 100
+  LT
+  JMF L14
+  SRF  0  3
+  SRF  0  3
+  DRF
+  STC  1
+  PLUS
+  ASG
+  JMP L13
+L14:
+  LVP

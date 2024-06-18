@@ -1,0 +1,15 @@
+  ENP L0
+L0:
+; --Asignación de i a (null,INT,1,VAL,0)
+  SRF  0  3
+  STC  0
+  ASG
+; --Asignación de j a (null,INT,1,VAL,0)
+  SRF  0  4
+  STC  0
+  ASG
+; --Asignación de k a (null,INT,1,VAL,0)
+  SRF  0  5
+  STC  0
+  ASG
+  LVP

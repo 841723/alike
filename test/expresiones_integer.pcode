@@ -1,0 +1,1051 @@
+  ENP L0
+L1:
+  SRF  0  7
+  ASGI
+  SRF  0  6
+  ASGI
+  SRF  0  5
+  ASGI
+  SRF  0  4
+  ASGI
+  SRF  0  3
+  ASGI
+  JMP L2
+L2:
+  SRF  0  3
+  DRF
+  SRF  0  4
+  DRF
+  EQ
+  JMF L3
+  SRF  0  6
+  DRF
+  SRF  0  6
+  DRF
+  DRF
+  STC  1
+  PLUS
+  ASG
+  JMP L4
+L3:
+  STC 108
+  WRT  0
+  STC 58
+  WRT  0
+  SRF  0  7
+  DRF
+  WRT  1
+  STC 32
+  WRT  0
+  STC 45
+  WRT  0
+  STC 62
+  WRT  0
+  STC 32
+  WRT  0
+  STC 73
+  WRT  0
+  STC 78
+  WRT  0
+  STC 67
+  WRT  0
+  STC 79
+  WRT  0
+  STC 82
+  WRT  0
+  STC 82
+  WRT  0
+  STC 69
+  WRT  0
+  STC 67
+  WRT  0
+  STC 84
+  WRT  0
+  STC 65
+  WRT  0
+  STC 32
+  WRT  0
+  STC 58
+  WRT  0
+  STC 32
+  WRT  0
+  STC 102
+  WRT  0
+  STC 111
+  WRT  0
+  STC 117
+  WRT  0
+  STC 110
+  WRT  0
+  STC 100
+  WRT  0
+  STC 32
+  WRT  0
+  SRF  0  3
+  DRF
+  WRT  1
+  STC 32
+  WRT  0
+  STC 32
+  WRT  0
+  STC 32
+  WRT  0
+  STC 101
+  WRT  0
+  STC 120
+  WRT  0
+  STC 112
+  WRT  0
+  STC 101
+  WRT  0
+  STC 99
+  WRT  0
+  STC 116
+  WRT  0
+  STC 101
+  WRT  0
+  STC 100
+  WRT  0
+  STC 32
+  WRT  0
+  SRF  0  4
+  DRF
+  WRT  1
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+L4:
+  SRF  0  5
+  DRF
+  SRF  0  5
+  DRF
+  DRF
+  STC  1
+  PLUS
+  ASG
+  CSF
+L0:
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 45
+  WRT  0
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  SRF  0 19
+  STC  0
+  ASG
+  SRF  0 20
+  STC  0
+  ASG
+  SRF  0  3
+  STC  1
+  ASG
+  SRF  0  4
+  STC  2
+  ASG
+  SRF  0  5
+  STC  3
+  ASG
+  SRF  0  6
+  STC  4
+  ASG
+  SRF  0  7
+  STC  5
+  ASG
+  STC  1
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  STC  1
+  ASG
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  STC  2
+  ASG
+  STC  3
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  STC  3
+  ASG
+  STC  4
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  STC  4
+  ASG
+  SRF  0  8
+  STC 29
+  ASG
+  STC  1
+  NGI
+  STC  1
+  NGI
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  STC  2
+  PLUS
+  STC  4
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  9
+  STC  5
+  MOD
+  STC  4
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  STC  2
+  TMS
+  STC  2
+  TMS
+  STC  2
+  TMS
+  STC 16
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC 10
+  STC 10
+  TMS
+  STC  2
+  PLUS
+  STC 102
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  STC 10
+  STC 10
+  TMS
+  PLUS
+  STC 102
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  NGI
+  STC  5
+  STC  5
+  DIV
+  STC  2
+  TMS
+  PLUS
+  STC  0
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  6
+  STC  2
+  DIV
+  STC  4
+  TMS
+  STC  2
+  DIV
+  STC  6
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  STC  2
+  PLUS
+  STC  3
+  DIV
+  STC  1
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  5
+  NGI
+  STC  1
+  STC  4
+  STC  2
+  DIV
+  TMS
+  PLUS
+  STC  3
+  NGI
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC 10
+  STC  4
+  DIV
+  STC  2
+  DIV
+  STC  1
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  3
+  DRF
+  NGI
+  STC  1
+  NGI
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  3
+  DRF
+  SRF  0  4
+  DRF
+  PLUS
+  STC  3
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  3
+  DRF
+  SRF  0  4
+  DRF
+  TMS
+  SRF  0  5
+  DRF
+  PLUS
+  STC  5
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  5
+  DRF
+  SRF  0  6
+  DRF
+  PLUS
+  STC  5
+  PLUS
+  SRF  0  7
+  DRF
+  DIV
+  STC  2
+  PLUS
+  STC  4
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  5
+  DRF
+  SRF  0  6
+  DRF
+  PLUS
+  STC  5
+  PLUS
+  SRF  0  7
+  DRF
+  STC  2
+  PLUS
+  DIV
+  STC  1
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  3
+  DRF
+  SRF  0  4
+  DRF
+  PLUS
+  STC  5
+  MOD
+  STC  3
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  5
+  DRF
+  STC 102
+  PLUS
+  STC  5
+  MOD
+  STC  0
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  1
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  PLUS
+  STC  3
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  6
+  DRF
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  SRF  0  5
+  DRF
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  PLUS
+  STC  7
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  SRF  0  4
+  DRF
+  SRF  0  3
+  DRF
+  PLUS
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  SRF  0  6
+  DRF
+  STC  2
+  DIV
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  PLUS
+  STC  5
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  5
+  PLUS
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  PLUS
+  STC  2
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  TMS
+  STC  2
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  STC  1
+  SBT
+  SRF  0  9
+  PLUS
+  DRF
+  DIV
+  STC  2
+  SRF  0 19
+  SRF  0 20
+  SRF  0  8
+  DRF
+  OSF 21  0 L1
+  SRF  0  8
+  SRF  0  8
+  DRF
+  STC  1
+  PLUS
+  ASG
+  STC 68
+  WRT  0
+  STC 101
+  WRT  0
+  STC 98
+  WRT  0
+  STC 101
+  WRT  0
+  STC 114
+  WRT  0
+  STC -61
+  WRT  0
+  STC -83
+  WRT  0
+  STC 97
+  WRT  0
+  STC 32
+  WRT  0
+  STC 104
+  WRT  0
+  STC 97
+  WRT  0
+  STC 98
+  WRT  0
+  STC 101
+  WRT  0
+  STC 114
+  WRT  0
+  STC 32
+  WRT  0
+  STC 108
+  WRT  0
+  STC 108
+  WRT  0
+  STC 101
+  WRT  0
+  STC 103
+  WRT  0
+  STC 97
+  WRT  0
+  STC 100
+  WRT  0
+  STC 111
+  WRT  0
+  STC 32
+  WRT  0
+  STC 97
+  WRT  0
+  STC 113
+  WRT  0
+  STC 117
+  WRT  0
+  STC -61
+  WRT  0
+  STC -83
+  WRT  0
+  STC 32
+  WRT  0
+  STC 115
+  WRT  0
+  STC 105
+  WRT  0
+  STC 110
+  WRT  0
+  STC 32
+  WRT  0
+  STC 112
+  WRT  0
+  STC 114
+  WRT  0
+  STC 111
+  WRT  0
+  STC 98
+  WRT  0
+  STC 108
+  WRT  0
+  STC 101
+  WRT  0
+  STC 109
+  WRT  0
+  STC 97
+  WRT  0
+  STC 115
+  WRT  0
+  STC 32
+  WRT  0
+  STC 108
+  WRT  0
+  STC -61
+  WRT  0
+  STC -87
+  WRT  0
+  STC 120
+  WRT  0
+  STC 105
+  WRT  0
+  STC 99
+  WRT  0
+  STC 111
+  WRT  0
+  STC 115
+  WRT  0
+  STC 32
+  WRT  0
+  STC 111
+  WRT  0
+  STC 32
+  WRT  0
+  STC 115
+  WRT  0
+  STC 105
+  WRT  0
+  STC 110
+  WRT  0
+  STC 116
+  WRT  0
+  STC -61
+  WRT  0
+  STC -95
+  WRT  0
+  STC 99
+  WRT  0
+  STC 116
+  WRT  0
+  STC 105
+  WRT  0
+  STC 99
+  WRT  0
+  STC 111
+  WRT  0
+  STC 115
+  WRT  0
+  STC 46
+  WRT  0
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  STC 68
+  WRT  0
+  STC 101
+  WRT  0
+  STC 32
+  WRT  0
+  STC 108
+  WRT  0
+  STC 97
+  WRT  0
+  STC 115
+  WRT  0
+  STC 32
+  WRT  0
+  SRF  0 19
+  DRF
+  WRT  1
+  STC 32
+  WRT  0
+  STC 102
+  WRT  0
+  STC -61
+  WRT  0
+  STC -77
+  WRT  0
+  STC 114
+  WRT  0
+  STC 109
+  WRT  0
+  STC 117
+  WRT  0
+  STC 108
+  WRT  0
+  STC 97
+  WRT  0
+  STC 115
+  WRT  0
+  STC 44
+  WRT  0
+  STC 32
+  WRT  0
+  SRF  0 20
+  DRF
+  WRT  1
+  STC 32
+  WRT  0
+  STC 104
+  WRT  0
+  STC 97
+  WRT  0
+  STC 110
+  WRT  0
+  STC 32
+  WRT  0
+  STC 100
+  WRT  0
+  STC 97
+  WRT  0
+  STC 100
+  WRT  0
+  STC 111
+  WRT  0
+  STC 32
+  WRT  0
+  STC 101
+  WRT  0
+  STC 108
+  WRT  0
+  STC 32
+  WRT  0
+  STC 114
+  WRT  0
+  STC 101
+  WRT  0
+  STC 115
+  WRT  0
+  STC 117
+  WRT  0
+  STC 108
+  WRT  0
+  STC 116
+  WRT  0
+  STC 97
+  WRT  0
+  STC 100
+  WRT  0
+  STC 111
+  WRT  0
+  STC 32
+  WRT  0
+  STC 99
+  WRT  0
+  STC 111
+  WRT  0
+  STC 114
+  WRT  0
+  STC 114
+  WRT  0
+  STC 101
+  WRT  0
+  STC 99
+  WRT  0
+  STC 116
+  WRT  0
+  STC 111
+  WRT  0
+  STC 46
+  WRT  0
+  STC 13
+  WRT  0
+  STC 10
+  WRT  0
+  LVP

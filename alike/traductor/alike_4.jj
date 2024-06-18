@@ -1,0 +1,1010 @@
+//*****************************************************************
+// File:   alike_4.jj
+// Author: Abel Romeo (846088) && Diego Raúl Roldán Urueña (841723)
+// Date:   abril 2024
+// Coms:   compilar mediante "ant"
+//         Analizador léxico-sintáctico
+//*****************************************************************
+
+options {
+ 	IGNORE_CASE = false;
+ 	DEBUG_PARSER = false;
+	STATIC = true;
+}
+
+PARSER_BEGIN(alike_4)
+
+
+package traductor;
+
+import java.util.ArrayList;
+
+import lib.symbolTable.*;
+import lib.symbolTable.Symbol.Types;
+import lib.symbolTable.Symbol.ParameterClass;
+import lib.symbolTable.exceptions.*;
+
+import lib.attributes.Return;
+import lib.attributes.Return.ReturnPosibilities;
+
+import lib.tools.SemanticFunctions;
+
+import lib.AuxFunctions;
+
+import lib.tools.codeGeneration.CGUtils;
+import lib.tools.codeGeneration.PCodeInstruction;
+import lib.tools.codeGeneration.CodeBlock;
+import lib.tools.codeGeneration.PCodeInstruction.OpCode;
+import lib.tools.CodeGenerationFunctions;
+
+import java.io.File;
+import java.io.FileWriter;
+
+import lib.attributes.Attributes;
+
+
+public class alike_4 {
+	
+	static SymbolTable st;
+	static CodeGenerationFunctions CGFunctions;
+	static SemanticFunctions SFunctions;
+
+	private static void initSymbolTable() {
+		st = new SymbolTable();
+		String[] reservedWords = {
+			"boolean", "integer", "character", "array", "of", "ref", "if", "then", "elsif", "else", "while", "loop", "begin", "end", "function", "procedure", "is", "return", "get", "skip_line", "put_line", "put", ";", ":", ":=", ",", "'", ".", "(", ")", "+", "-", "*", "/=", "/", "mod", ">", "<", "=", "not", "and", "or", "true", "false", "int2char", "char2int", "null", "exit"
+		};
+		st.insertReservedWords(reservedWords);
+	}
+
+
+    public static void main(String[] args) {
+    	alike_4 parser;
+
+		// String filename = args[0];
+		String filename = args[0]+".al";
+		    	
+    	try {
+	    	if(args.length == 0) {
+				parser = new alike_4(System.in);
+			}
+			else {
+	            parser = new alike_4(new java.io.FileInputStream(filename));
+			}
+			//Programa es el símbolo inicial de la gramática
+			
+			initSymbolTable();
+			SFunctions = new SemanticFunctions();
+			CGFunctions = new CodeGenerationFunctions(st);
+			AuxFunctions.printInicioTraduccion(filename);
+			parser.alike_4(args[0]+".pcode");
+			AuxFunctions.printExitoTraduccion(filename);
+		}
+		catch (java.io.FileNotFoundException e) {
+			AuxFunctions.printErrorHeader();
+			System.err.println ("Fichero " + filename + " no encontrado.");
+			System.err.println(AuxFunctions.line);
+
+		}
+		catch (TokenMgrError e) {
+			AuxFunctions.printErrorHeader();
+        	System.err.println("LEX_ERROR: " + e.getMessage());
+			System.err.println(AuxFunctions.line);
+
+        }
+        catch (ParseException e) {
+			AuxFunctions.printErrorHeader();
+            System.err.println("ERROR: " + e.getMessage());
+			// System.err.println("LINE: " + e.currentToken.beginLine);
+			System.err.println(AuxFunctions.line);
+
+        } 
+
+        catch(Error e) {
+			System.err.println("ERROR: " + e.getMessage());
+
+			System.err.println(AuxFunctions.line);
+		}
+    }
+}
+PARSER_END(alike_4)
+SKIP : {
+	" "
+|	"\t"
+|	"\n"
+|	"\r"
+|	"\r\n"
+}
+
+TOKEN : {
+ 	< #LETTER: (["a"-"z","A"-"Z"]) >
+|	< #DIGIT: ["0"-"9"] >
+}
+
+TOKEN [IGNORE_CASE] : {
+		< tBOOL: "boolean" >
+	|	< tINT: "integer" >
+	|	< tCHAR: "character" >
+	|	< tARRAY: "array" >
+	|	< tOF: "of" >
+	|	< tREF: "ref" >
+	|	< tIF: "if" >
+	|	< tTHEN: "then" >
+	|	< tELSIF: "elsif" >
+	|	< tELSE: "else" >
+	|	< tWHILE: "while" >
+	|	< tLOOP: "loop" >
+	|	< tBEGIN: "begin" >
+	|	< tEND: "end" >
+	|	< tFUNCTION: "function" >
+	|	< tPROCEDURE: "procedure" >
+	|	< tIS: "is" >
+	|	< tRETURN: "return" >
+	|	< tGET: "get" >
+	|	< tSKIP_LINE: "skip_line" >
+	|	< tPUT_LINE: "put_line" >
+	|	< tPUT: "put" >
+	|	< tPC: ";" >
+	|	< tDP: ":" >
+	|	< tASIG: ":=" >
+	|	< tCOMA: "," >
+	|	< tCOMILLA: "'" >
+	|	< tVARCHAR: "'" ~[] "'" >
+	|	< tPUNTO: "." >
+	|	< tAPAR: "(" >
+	|	< tCPAR: ")" >
+	|	< tMAS: "+" >
+	|	< tMENOS: "-" >
+	|	< tMULT: "*" >
+	|	< tDIST: "/=" >
+	|	< tDIV: "/" >
+	|	< tMOD: "mod" >
+	|	< tMAYOR: ">" >
+	|	< tMENOR: "<" >
+	|	< tIGUAL: "=" >
+	|	< tNOT: "not" >
+	|	< tAND: "and" >
+	|	< tOR: "or" >
+	|	< tTRUE: "true" >
+	|	< tFALSE: "false" >
+	|	< tI2C : "int2char" >
+	|	< tC2I : "char2int" >
+	|	< tNULL: "null" >
+	|	< tEXIT: "exit" >
+	|	< tSTRING:  ("\""(~["\""]|"\"\"")*"\"") >
+	|	< tNUM: ((<DIGIT>)+) >
+	|	< tID: ("_"|<LETTER>)("_"|<LETTER>|<DIGIT>)* >
+}
+
+SPECIAL_TOKEN : {
+ 	< tBASURA: ~[] >
+	 	{
+			System.err.println("Carácter extraño \"" + matchedToken.image + "\". Reemplazo por espacio");
+			matchedToken.image = " ";
+	 	}
+|	< tCOMMENT: ("--"(~["\n"])*"\n") >
+		{
+			matchedToken.image = "";
+		}
+}
+//---------------------------------------------------------
+void alike_4(String outputFile) : 
+{
+	CodeBlock programa = new CodeBlock();
+	String label = CGUtils.newLabel();
+	Token t;
+	programa.addInst(PCodeInstruction.OpCode.ENP, label);
+
+	Attributes attributes = new Attributes();
+	attributes.returnAttr = new Return(Types.UNDEFINED, ReturnPosibilities.NO_RETURN);
+	attributes.label = label;
+
+	Attributes att_instructions, att_proc_func_declaration = null, att_var_dec_item = new Attributes();
+	ArrayList<Attributes> att_proc_func_declaration_list = new ArrayList<Attributes>();
+	ArrayList<Attributes> att_var_dec_list = new ArrayList<Attributes>();
+}
+{
+	<tPROCEDURE>
+	t=<tID> {st.insertReservedWord(t.image.toLowerCase());}
+	<tIS>
+	( att_var_dec_item = variable_declaration() {att_var_dec_list.add(att_var_dec_item);} <tPC> )*
+	( att_proc_func_declaration=proc_func_declaration() {att_proc_func_declaration_list.add(att_proc_func_declaration);} )*
+	<tBEGIN>
+	att_instructions = instructions(attributes)
+	<tEND>
+	<tPC>
+	{
+		for (Attributes att: att_var_dec_list) 
+			programa.addBlock(att.code);
+
+		for (Attributes att : att_proc_func_declaration_list) 
+			programa.addBlock(att.code);
+		
+		programa.addLabel(label);
+		programa.addBlock(att_instructions.code);
+		programa.addInst(PCodeInstruction.OpCode.LVP);
+		try {
+			FileWriter fw = new FileWriter(outputFile);
+			fw.write(programa.toString());
+			fw.close();
+		}
+		catch (Exception e) {
+			System.err.println("Error al escribir el fichero de salida");
+		}
+
+	}
+}
+
+
+//Declaración de variables
+Attributes variable_declaration() :
+{
+	ArrayList<String> ids = new ArrayList<String>();
+	Token t;
+	Symbol symbol;	
+}
+{
+	t = <tID> { ids.add(t.image.toLowerCase());	} 
+	(
+		<tCOMA> t = <tID> { ids.add(t.image.toLowerCase());	} 
+	)* 
+	<tDP> symbol = type()
+	{
+		Attributes att = new Attributes();
+		SFunctions.variable_declaration(ids, symbol, st);
+		AuxFunctions.printSymbolTable(st);
+		att.code = CGFunctions.variable_declaration(ids);
+		return att;
+	}
+}
+
+//Tipos de variables
+Symbol type() :
+{
+	boolean is_array = false;
+	Attributes minIndAtt = null, maxIndAtt = null;
+	Types type;
+}
+{
+	(
+		<tARRAY> <tAPAR> minIndAtt=numbers() <tPUNTO> <tPUNTO> maxIndAtt=numbers() <tCPAR> <tOF> 
+		{
+			is_array = true;
+		}
+	)?
+	type = type_arrayable_returned()
+	{
+		int minInd = 0, maxInd = 0;
+		if (is_array) {
+			minInd = minIndAtt.valInt;
+			maxInd = maxIndAtt.valInt;
+		}
+		return SFunctions.type(is_array, minInd, maxInd, type);
+	}
+}
+
+//Tipos de variables arrayables
+Types type_arrayable_returned() :
+{
+}
+{
+		<tINT> { return Types.INT; }
+	|	<tBOOL> { return Types.BOOL; }
+	|	<tCHAR > { return Types.CHAR; }
+}
+
+//proc_func_declaration: (procedure_declaration | function_declaration)
+Attributes proc_func_declaration() :
+{
+	Attributes attributes = new Attributes();
+}
+{
+	(
+			attributes = procedure_declaration()
+		|	attributes = function_declaration()
+	)
+	{
+		return attributes;
+	}
+}
+
+//procedure_declaration: < tPROCEDURE > < tID > (proc_func_parameters)? < tIS > (variable_declaration)* (proc_func_declaration)* < tBEGIN > instructions < tEND > < tPC >
+Attributes procedure_declaration() :
+{
+	Token t;
+	Attributes att_inst, att_proc_func_declaration;
+	Attributes parList = new Attributes();
+	ArrayList<Attributes> att_proc_func_declaration_list = new ArrayList<Attributes>();
+	String label1 = CGUtils.newLabel(), label2 = CGUtils.newLabel();
+}
+{
+	<tPROCEDURE>
+	t = <tID> { AuxFunctions.printIfVerbose("procedimiento "+t.image.toLowerCase()); }
+	(
+		parList = proc_func_parameters()
+	)?
+	{
+		st.insertSymbol(new SymbolProcedure(t.image.toLowerCase(), parList.parList, label1));
+		st.insertBlock();
+		for (Symbol symbol : parList.parList) {
+			st.insertSymbol(symbol);
+		}	
+		parList.code = CGFunctions.parameters(parList.parList);
+	}
+	
+	<tIS>
+
+	(variable_declaration() <tPC>)*
+	(
+		att_proc_func_declaration = proc_func_declaration() 
+		{ att_proc_func_declaration_list.add(att_proc_func_declaration); }
+	)*
+	<tBEGIN>
+	{
+		Attributes attributes = new Attributes();
+		attributes.returnAttr = new Return(Types.UNDEFINED, ReturnPosibilities.NO_RETURN);
+	}
+	att_inst = instructions(attributes)
+	<tEND>
+	<tPC>
+	{
+		st.removeBlock();
+		attributes = new Attributes();
+
+
+		attributes.code.addLabel(label1);
+		attributes.code.addBlock(parList.code);
+		attributes.code.addInst(PCodeInstruction.OpCode.JMP, label2);
+
+		for (Attributes att : att_proc_func_declaration_list) {
+			attributes.code.addBlock(att.code);
+		}
+
+		attributes.code.addLabel(label2);
+		attributes.code.addBlock(att_inst.code);
+		attributes.code.addInst(PCodeInstruction.OpCode.CSF);
+
+		return attributes;
+	}
+}
+
+//function_declaration: < tFUNCTION > < tID > (proc_func_parameters)? < tDP > 
+// 		type() < tIS > (variable_declaration)* (proc_func_declaration)* < tBEGIN >
+//		instructions < tEND > < tPC >
+Attributes function_declaration() :
+{
+	Token t;
+	Types typeReturned;
+
+	Attributes att_inst, att_proc_func_declaration;
+	Attributes parList = new Attributes();
+	ArrayList<Attributes> att_proc_func_declaration_list = new ArrayList<Attributes>();
+	String label1 = CGUtils.newLabel(), label2 = CGUtils.newLabel();
+
+}
+{
+	<tFUNCTION>
+	t = <tID>
+	(
+		parList = proc_func_parameters()
+	)?
+	<tRETURN>
+	typeReturned = type_arrayable_returned()
+	{
+		st.insertSymbol(new SymbolFunction(t.image.toLowerCase(), parList.parList ,typeReturned, label1));
+		st.insertBlock();
+		for (Symbol symbol : parList.parList) 
+			st.insertSymbol(symbol);
+		
+		parList.code = CGFunctions.parameters(parList.parList);
+		AuxFunctions.printSymbolTable(st);
+	}
+	<tIS>
+	(variable_declaration() <tPC>)*
+	(
+		att_proc_func_declaration = proc_func_declaration()
+		{ att_proc_func_declaration_list.add(att_proc_func_declaration); }
+	)*
+	<tBEGIN>
+	{
+		Attributes attributes = new Attributes();
+		attributes.returnAttr = new Return(typeReturned,ReturnPosibilities.RETURN);
+	}
+	att_inst = instructions(attributes)
+	<tEND>
+	<tPC>
+	{
+		st.removeBlock();
+		attributes = new Attributes();
+
+		attributes.code.addLabel(label1);
+		attributes.code.addBlock(parList.code);
+		attributes.code.addInst(PCodeInstruction.OpCode.JMP, label2);
+
+		for (Attributes att : att_proc_func_declaration_list) 
+			attributes.code.addBlock(att.code);
+		
+
+		attributes.code.addLabel(label2);
+		attributes.code.addBlock(att_inst.code);
+		attributes.code.addInst(PCodeInstruction.OpCode.CSF);
+
+		return attributes;
+	}
+}
+
+Attributes proc_func_parameters() :
+{
+	Attributes att;
+}
+{
+	<tAPAR>
+	att = parameters()
+	<tCPAR>
+	{
+		return att;
+	}
+}
+
+Attributes parameters() :
+{
+	ArrayList<ArrayList<Symbol>> parList = new ArrayList<ArrayList<Symbol>>();
+	Token t;
+	ArrayList<Symbol> parListSameType = new ArrayList<Symbol>(); 
+}
+{
+	parListSameType = parameters_same_type() { parList.add(parListSameType); }
+	(
+		<tPC>
+		parListSameType = parameters_same_type() { parList.add(parListSameType); }
+	)*
+
+	{
+		Attributes att = new Attributes();
+
+		att.parList = SFunctions.parameters(parList);
+		return att;
+	}
+}
+
+ArrayList<Symbol> parameters_same_type() :
+{
+	ArrayList<String> ids = new ArrayList<String>();
+	Token t;
+	Symbol symbol;
+	boolean is_ref = false;
+}
+{
+	t = <tID> {ids.add(t.image.toLowerCase());}
+	(
+		<tCOMA> t = <tID> {ids.add(t.image.toLowerCase());}
+	)* 
+	<tDP> 
+	(
+		<tREF> { is_ref = true; }
+	)? 
+
+	symbol = type()
+	{
+		return SFunctions.parameters_same_type(ids, symbol, is_ref);
+	}
+}
+
+
+// Llamada a procedimiento o función o componente de array o variable en expresion
+Attributes proc_func_array_call() :
+{
+	Token t;
+	Attributes att;
+	ArrayList<Attributes> parList = new ArrayList<Attributes>();
+
+}
+{ 
+	t = <tID>
+	(
+		<tAPAR> att = expression() {parList.add(att);}
+		(
+			<tCOMA> att = expression() { parList.add(att); }
+		)*
+		<tCPAR>
+	)? 
+	{
+		Attributes attributes = new Attributes();
+		attributes.symbol = SFunctions.proc_func_array_call(st, t, parList);
+		return CGFunctions.proc_func_array_call(t, parList, attributes);
+	}
+}
+
+//instructions de un procedimiento o función
+Attributes instructions(Attributes att) :
+{
+	Attributes att_one_inst;
+	Types type_returned = Types.UNDEFINED;
+	boolean has_returned_at_least_once = false;
+
+	CodeBlock block = null;
+	block = new CodeBlock();
+}
+{
+	(
+		att_one_inst = one_instruction(att) 
+		<tPC>
+		{
+			if (att_one_inst.returnAttr.posibility == ReturnPosibilities.RETURN) {
+				has_returned_at_least_once = true;
+				type_returned = att_one_inst.returnAttr.typeReturned;
+			}
+			if (!att_one_inst.code.isEmpty()) {
+				block.addBlock(att_one_inst.code);
+			}
+		}
+	)+
+	{
+		Attributes attributes = new Attributes();
+		attributes.returnAttr = SFunctions.instructions_check_returned(att.returnAttr, has_returned_at_least_once, type_returned);
+		attributes.code = block;
+		return attributes;
+	}
+
+}
+
+// recibe un booleano que indica si el bloque de instrucciones es un bloque de una función y puede ser un return
+// devuelve true si la instrucción es un return
+Attributes one_instruction(Attributes mayReturn) :
+{
+	Attributes has_returned;
+	Symbol s;
+
+	Attributes att = new Attributes();
+	att.returnAttr = new Return(Types.UNDEFINED, ReturnPosibilities.NO_RETURN);
+
+	Attributes attributesRes;
+}
+{
+		<tEXIT>										{ att.code.addInst(PCodeInstruction.OpCode.LVP); return att;}
+	|	attributesRes = instruction_write() 		{ att.code = attributesRes.code; return att; }
+	|	attributesRes = instruction_read() 			{ att.code = attributesRes.code; return att; }
+
+	|	attributesRes = instruction_asign() 		{ att.code = attributesRes.code; return att; }
+	| 	<tNULL> 			 						{ return att; }
+
+	|	has_returned = instruction_if(mayReturn) 	{ return has_returned; }
+	|	has_returned = instruction_while(mayReturn) { return has_returned; }
+
+	| 	<tRETURN> attributesRes = expression()
+	{
+		att.code.addBlock(attributesRes.code);
+		att.code.addInst(PCodeInstruction.OpCode.CSF);
+		att.returnAttr = SFunctions.one_instruction_return(mayReturn.returnAttr, attributesRes.symbol);
+		return att;	
+	}
+}
+
+// Instrucción if
+Attributes instruction_if(Attributes mayReturn) :
+{
+	if (mayReturn.returnAttr.posibility == ReturnPosibilities.RETURN) {
+		mayReturn.returnAttr.posibility = ReturnPosibilities.MAY_RETURN;
+	}
+
+	ArrayList<Attributes> has_returned_list = new ArrayList<Attributes>();
+	ArrayList<Attributes> expression_att_list = new ArrayList<Attributes>();
+	
+	Attributes has_returned, att_returned, expression_att_list_item;
+}
+{
+	<tIF> 
+	att_returned = expression() { SFunctions.instruction_check_boolean(att_returned); expression_att_list.add(att_returned);} 
+	<tTHEN> 
+	has_returned = instructions(mayReturn) { has_returned_list.add(has_returned);}
+	(
+		<tELSIF> att_returned = expression() { SFunctions.instruction_check_boolean(att_returned); expression_att_list.add(att_returned);} 
+		<tTHEN> 
+		has_returned = instructions(mayReturn) { has_returned_list.add(has_returned);}
+	)*
+	(
+		<tELSE> 
+		has_returned = instructions(mayReturn) { has_returned_list.add(has_returned);
+		expression_att_list.add(null);}
+	)? 
+	<tEND> <tIF>
+
+	{
+		Attributes attributes = new Attributes();
+		attributes.returnAttr = SFunctions.instruction_if_check_returned(mayReturn.returnAttr, has_returned_list);		
+		attributes.code = CGFunctions.instruction_if(expression_att_list, has_returned_list);
+		return attributes;
+	}
+}
+
+
+// while
+Attributes instruction_while(Attributes mayReturn) :
+{
+	if (mayReturn.returnAttr.posibility == ReturnPosibilities.RETURN) {
+		mayReturn.returnAttr.posibility = ReturnPosibilities.MAY_RETURN;
+	}
+
+	Attributes has_returned, att = new Attributes(), att_returned;
+	Symbol e;
+	String label1, label2;
+}
+{
+	<tWHILE>
+	{
+		// Se añade la etiqueta de inicio del bucle
+		label1 = CGUtils.newLabel();
+		att.label = label1;
+	}
+	att_returned = expression() { SFunctions.instruction_check_boolean(att_returned); }  
+	<tLOOP>
+	has_returned = instructions(mayReturn)
+	<tEND> <tLOOP>
+	
+	{
+		label2 = CGUtils.newLabel();
+		att.code.addLabel(att.label);
+
+		att.code.addBlock(att_returned.code);
+		att.code.addInst(PCodeInstruction.OpCode.JMF, label2);
+
+		att.code.addBlock(has_returned.code);
+		att.code.addInst(PCodeInstruction.OpCode.JMP, att.label);
+		att.code.addLabel(label2);
+		has_returned.label = att.label;
+		has_returned.code = att.code;
+		
+		return has_returned;
+	}
+}
+
+Attributes instruction_asign():
+{
+	Symbol s;
+	Attributes att_returned = null;
+
+	Attributes att = new Attributes(), att_proc_func_array_call;
+}
+{
+	att_proc_func_array_call = proc_func_array_call() 
+	{
+		SFunctions.instruction_asign_check_array_assign(att_proc_func_array_call);
+	}
+	(
+		<tASIG> att_returned = expression()
+	)?
+	{
+		att.code.addBlock(CGFunctions.asignValue(att_proc_func_array_call,att_returned));
+
+		SFunctions.instruction_asign_check_expression(att_returned,att_proc_func_array_call);
+		return att;
+	}
+}
+
+Attributes instruction_write() :
+{
+	boolean putLine = false;
+
+	Attributes att = new Attributes();
+}
+{
+	(
+			<tPUT_LINE> {putLine=true;} (<tAPAR> att = writeable() <tCPAR>)?
+		|	<tPUT> <tAPAR> att = writeable() <tCPAR>
+	)
+	{
+		if (putLine) {
+			Attributes attAux = new Attributes();
+			attAux.valString = "\n";
+			att.lExps.add(attAux);
+		}
+		
+		att.code = CGFunctions.write(att.lExps);
+		return att;
+	}
+}
+
+Attributes writeable() :
+{
+	Token t = null;
+	Attributes att = null, att_returned = null;
+}
+{
+	(
+			t = <tSTRING> (<tCOMA> att = writeable())?
+		|	att_returned = expression() (<tCOMA> att = writeable()) ?
+	)
+	{
+		Attributes attributes = new Attributes();
+		if (att_returned == null) {
+			if (t != null) {
+				// se trata de un string
+				Attributes attT = new Attributes();
+				attT.valString = t.image.substring(1, t.image.length()-1); 
+				attT.valString = attT.valString.replace("\"\"", "\"");
+				attributes.lExps.add(attT);
+			}
+		}
+		else {
+			// si es una expresion
+			attributes.lExps.add(att_returned);
+		}
+
+		if (att != null) {
+			// si hay mas elementos para escribir
+			attributes.lExps.addAll(att.lExps);
+		}
+		return attributes;
+	}
+}
+
+Attributes instruction_read() :
+{
+	Attributes att = new Attributes();
+}
+{
+	(
+			<tGET> <tAPAR> att = readable() <tCPAR>
+		|	<tSKIP_LINE>
+			{
+				String label = CGUtils.newLabel();
+				int tmp_var = st.getTmpVar();
+
+				att.code.addLabel(label);
+
+				att.code.addInst(PCodeInstruction.OpCode.SRF, 0, tmp_var);
+				att.code.addInst(PCodeInstruction.OpCode.RD, 0);
+				att.code.addInst(PCodeInstruction.OpCode.SRF, 0, tmp_var);
+				att.code.addInst(PCodeInstruction.OpCode.DRF);
+				att.code.addInst(PCodeInstruction.OpCode.STC, 10);
+				att.code.addInst(PCodeInstruction.OpCode.EQ);
+				att.code.addInst(PCodeInstruction.OpCode.JMF, label);
+			}
+	)
+	{
+		return att;
+	}
+}
+
+Attributes readable() :
+{
+	Symbol s;
+	Attributes att_redeable = new Attributes(), att_returned;
+}
+{
+	att_returned = expression() (<tCOMA> att_redeable = readable())?
+	{
+		SFunctions.readable(st,att_returned.symbol); 
+		Attributes att = new Attributes();
+
+		att.code.addBlock(CGFunctions.readable(att_returned));
+		
+		int isInt = att_returned.type == Types.INT ? 1 : 0;
+		att.code.addInst(PCodeInstruction.OpCode.RD, isInt);
+
+		att.code.addBlock(att_redeable.code);
+		
+		return att;
+	}
+}
+
+
+Attributes expression() :
+{
+	Attributes att1, att2;
+}
+{ 	
+	att1 = term() 
+	(
+			(
+				<tAND> att2 = term() 
+				{
+					att1 = CGFunctions.joinAttributes(att1, att2, Types.BOOL, Types.BOOL);
+					att1.code.addInst(PCodeInstruction.OpCode.AND);
+				}
+			)+
+		|	(
+				<tOR> att2 = term()
+				{
+					att1 = CGFunctions.joinAttributes(att1, att2, Types.BOOL, Types.BOOL);
+					att1.code.addInst(PCodeInstruction.OpCode.OR);
+				}
+			)+
+	)?
+	{
+		return att1;
+	}
+}
+
+Attributes term() :
+{ 
+	Attributes att1, att2;
+}
+{
+	att1 = arith_exp() att2 = term_plus()
+	{
+		return CGFunctions.joinAttributes(att1, att2, att1.type, Types.BOOL);
+	}
+}
+
+Attributes term_plus() :
+{ 
+	boolean equal = false;
+	Attributes att;
+}
+{ 	
+	<tIGUAL> att = term()
+		{
+			return CGFunctions.addOperand(att, PCodeInstruction.OpCode.EQ);
+		}
+
+|	<tDIST> att = term()
+		{
+			return CGFunctions.addOperand(att, PCodeInstruction.OpCode.NEQ);
+		}
+
+|	<tMAYOR> (<tIGUAL> {equal=true;})? att = term()
+		{
+			PCodeInstruction.OpCode op = equal ? PCodeInstruction.OpCode.GTE : PCodeInstruction.OpCode.GT;
+			return CGFunctions.addOperand(att, op);
+		}
+
+|	<tMENOR> (<tIGUAL> {equal=true;})? att = term()
+		{
+			PCodeInstruction.OpCode op = equal ? PCodeInstruction.OpCode.LTE : PCodeInstruction.OpCode.LT;
+			return CGFunctions.addOperand(att, op);
+		}
+
+|	{
+		//epsilon
+		return null;
+	}
+}
+
+Attributes arith_exp() :
+{
+	Attributes att1, att2;
+	boolean is_negative1 = false, is_negative2 = false;
+}
+{
+	(	
+		<tMAS>
+	|	<tMENOS> { is_negative1 = true; }
+	)?
+	att1 = muldiv() 
+	{
+		if (is_negative1)
+			att1.code.addInst(PCodeInstruction.OpCode.NGI);
+	}
+	(
+		(
+				<tMAS>
+			| 	<tMENOS> { is_negative2 = true; }
+		)
+		att2 = muldiv()
+		{
+			if (is_negative2) {
+				att2.code.addInst(PCodeInstruction.OpCode.NGI);
+				is_negative2 = false;
+			}
+			att1 = CGFunctions.joinAttributes(att1, att2, Types.INT, Types.INT);
+			att1.code.addInst(PCodeInstruction.OpCode.PLUS);
+		}
+	)*
+	{
+		return CGFunctions.joinAttributes(att1, null, Types.INT, Types.INT);;
+	}
+}
+
+
+Attributes muldiv() :
+{ 
+	Attributes att1, att2, att3;
+}
+{
+	att1 = factor() 
+	(
+		att2 = muldiv_plus() att3=factor() 
+		{
+			att1 = CGFunctions.joinAttributes(att1, att3, Types.INT, Types.INT);
+			att1.code.addBlock(att2.code);
+		}
+	)*
+	{	
+		return CGFunctions.joinAttributes(att1, null, Types.INT, Types.INT);
+	}
+}
+
+Attributes muldiv_plus() :
+{ 
+	Attributes att = new Attributes();
+}
+{
+		<tMULT>
+			{
+				att.code.addInst(PCodeInstruction.OpCode.TMS);
+				return att;
+			}
+
+	|	<tMOD>
+			{
+				att.code.addInst(PCodeInstruction.OpCode.MOD);
+				return att;
+			}
+
+	|	<tDIV>
+			{
+				att.code.addInst(PCodeInstruction.OpCode.DIV);
+				return att;
+			}
+
+}
+
+Attributes factor() :
+{
+	Attributes att;
+	boolean is_not = false;
+}
+{
+	(	
+		att = primario() 
+	|	<tNOT> att = primario() {is_not = true;}
+	)
+	{
+		if (is_not) {
+			if (att.type != Types.BOOL) {
+				if ((att.type == Types.ARRAY && att.symbol.type != Types.BOOL) 
+					|| (att.type == Types.FUNCTION) && ((SymbolFunction) att.symbol).returnType != Types.BOOL) {
+					System.err.println("ERR-33");	
+					throw new MismatchTypesExpressionException(Types.BOOL, att.type);
+				}
+			}
+			att.code.addInst(PCodeInstruction.OpCode.NGB); 
+		}
+		return att;
+	}
+}
+
+Attributes primario() :
+{ 
+	Token t, tAux;
+	Symbol s;
+
+	Attributes att, att_res;
+}
+{
+		<tAPAR> att_res = expression() <tCPAR> 
+			{ return att_res; }
+
+	|	<tI2C> <tAPAR> att_res = expression() <tCPAR> 
+			{ return SFunctions.i2c(att_res); }
+
+	|	<tC2I> <tAPAR> att_res = expression() <tCPAR> 
+			{ return SFunctions.c2i(att_res); }
+
+	| 	att = proc_func_array_call() 
+			{ return att; } 
+			
+	|	t = <tNUM> 
+			{ return new Attributes(Integer.parseInt(t.image)); }
+
+	|	t = <tVARCHAR> 
+			{ return new Attributes(t.image.charAt(1));}
+
+	|	<tTRUE> 
+			{ return new Attributes(true); }
+
+	|	<tFALSE> 
+			{ return new Attributes(false); }
+} 
+
+Attributes numbers() :
+{
+	Token t;
+}
+{
+		(<tMAS>)? t = <tNUM> 
+			{ return new Attributes(Integer.parseInt(t.image)); }
+	| 	<tMENOS> t = <tNUM> 
+			{ return new Attributes(0-Integer.parseInt(t.image)); }
+}
